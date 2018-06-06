@@ -26,21 +26,21 @@ function draw() {
   stroke(255);
   strokeWeight(8);
   for (let i = 0; i < x_vals.length; i++) {
-    let px = map(x_vals[i], 0, 1, 0, width);
-    let py = map(y_vals[i], 0, 1, height, 0);
+    let px = map(x_vals[i], -1, 1, 0, width);
+    let py = map(y_vals[i], -1, 1, height, 0);
     point(px,py);
   }
 
   tf.tidy(() => {
-    const xs = [0,1];
+    const xs = [-1,1];
     const ys = predict(xs);
 
-    let x1 = map(xs[0], 0, 1, 0, width);
-    let x2 = map(xs[1], 0, 1, 0, width);
+    let x1 = map(xs[0], -1, 1, 0, width);
+    let x2 = map(xs[1], -1, 1, 0, width);
 
     let lineY = ys.dataSync();
-    let y1 = map(lineY[0], 0, 1, height, 0);
-    let y2 = map(lineY[1], 0, 1, height, 0);
+    let y1 = map(lineY[0], -1, 1, height, 0);
+    let y2 = map(lineY[1], -1, 1, height, 0);
     strokeWeight(2);
     line(x1, y1, x2, y2);
   })
@@ -48,8 +48,8 @@ function draw() {
 }
 
 function mousePressed(){
-  let x = map(mouseX, 0, width, 0, 1);
-  let y = map(mouseY, 0, height , 1, 0);
+  let x = map(mouseX, 0, width, -1, 1);
+  let y = map(mouseY, 0, height , 1, -1);
   x_vals.push(x);
   y_vals.push(y);
 }
